@@ -6,17 +6,21 @@ const IdentityContext = React.createContext({})
 exports.IdentityContext = IdentityContext
 const Provider = props => {
   const [user, setUser] = React.useState()
+
   React.useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('gotrue.user') || {})
+    user && setUser(user)
+
     netlifyIdentity.init({})
     netlifyIdentity.on('login', user => {
-      netlifyIdentity.close()
       setUser(user)
+      netlifyIdentity.close()
     })
     netlifyIdentity.on('logout', () => {
-      netlifyIdentity.close()
       setUser()
+      netlifyIdentity.close()
     })
-  })
+  }, [])
 
   return (
     <IdentityContext.Provider value={{ identity: netlifyIdentity, user }}>
