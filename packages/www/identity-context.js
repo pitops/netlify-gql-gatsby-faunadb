@@ -8,7 +8,7 @@ const Provider = props => {
   const [user, setUser] = React.useState()
 
   React.useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('gotrue.user') || {})
+    const user = JSON.parse(window.localStorage.getItem('gotrue.user') || {})
     user && setUser(user)
 
     netlifyIdentity.init({})
