@@ -9,8 +9,8 @@ const typeDefs = gql`
     id: ID!
     text: String!
     done: Boolean!
-  },
-  type Mutation: {
+  }
+  type Mutation {
     addTodo(text: String!): Todo
     updateTodoDone(id: ID!): Todo
   }
